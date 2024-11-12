@@ -7,8 +7,13 @@ var services = new DiServiceCollection();
 
 // services.RegisterSingleton<RandomGuidGenerator>();
 // services.RegisterTransient<RandomGuidGenerator>();
-services.RegisterTransient<ISomeService, SomeServiceOne>();
-services.RegisterSingleton<IRandonGuidProvider, RandonGuidProvider>();
+
+services.RegisterSingleton<ISomeService, SomeServiceOne>();
+// services.RegisterTransient<ISomeService, SomeServiceOne>();
+
+// services.RegisterSingleton<IRandonGuidProvider, RandonGuidProvider>();
+services.RegisterTransient<IRandonGuidProvider, RandonGuidProvider>();
+
 services.RegisterSingleton<MainApp>();
 
 
@@ -16,9 +21,10 @@ var container = services.GenerateContainer();
 
 var serviceFirst = container.GetService<ISomeService>();
 var serviceSecond = container.GetService<ISomeService>();
+
 var mainApp = container.GetService<MainApp>();
 
-// serviceFirst.PrintSomething();
-// serviceSecond.PrintSomething();
+serviceFirst.PrintSomething();
+serviceSecond.PrintSomething();
 
-await mainApp.StartAsync();
+// await mainApp.StartAsync();
